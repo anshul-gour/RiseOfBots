@@ -1,0 +1,15 @@
+#!/bin/sh
+cd src
+make text
+cd ../files
+make
+cd samples
+make
+cd ../..
+./combat maps/map1 BlackCats Fire
+echo 
+echo
+echo This is a sample run.
+echo ./combat maps/map1 BlackCats Fire
+echo To run your binaries type:
+echo ./combat maps/mapfile binaryCode1 binaryCode2

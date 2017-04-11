@@ -1,0 +1,107 @@
+Rise Of Bots.
+
+This is a game that has been developed to host an event in Shaastra 2004, the technical festival of IIT Madras, India by the students of that institution.
+While all attempts have been made to maintain similarity between the Windows and Linux versions of this program, slight differences might have crept in. It has been noticed that the Linux version gives slightly better performance when compared to the Windows version. Hence you are advised to test your code a few times on the Linux version, as this is what will be used for the event in Shaasthra 2004.
+
+
+Getting started (for Linux users) :
+
+Extract the contents of the archive into the respective directories.
+To build all the binaries type './buildgl' or './buildtext'.
+	This will generate :
+		1. combat Engine & display
+		2. also generate sample codes :: BlackCats,Fire,Messager...
+		3. a sample run of BlackCats & Fire.
+
+But before doing this:
+
+For the GL graphics display you need to install Mesa and Mesa libs.
+You can download this at http://www.mesa3d.org
+
+To install Mesa-6.xx
+	1.Extract both mesalib & mesademo in same folder e.g. Mesa-6.xx.
+	2.use the following commands in the Mesa-6.xx directory.
+		chmod a+x bin/mklib
+		make linux-x86
+
+		or see Mesa-6.xx/docs/install.html & index.html
+
+		This will generate a number of liberay .so files in lib dir.
+
+		Every time when you run Display you have to set this .so files in the environment
+			Either you can set envirnment variable by typing
+				cd <Mesa-6.xx/lib
+				export LD_LIBRARY_PATH={PWD}
+
+			or
+			make a link to all your libraries e.g.
+				ln -s ~Mesa.6.xx/lib/libglut.so.3 /usr/lib/libglut.so
+
+			or
+
+			copy all lib .so files in /usr/lib
+				cp Mesa-6.xx/lib/* /usr/local/lib/
+			copy all include .h files in /usr/include
+				cp Mesa-6.xx/include/GL/* /usr/local/include/GL/
+
+Install Mesa 5.xx (Alternately)
+1.Extract both Mesa-5.xx lib & demo in same folder e.g Mesa.5.xx
+2.type : ./configure --prefix=/usr
+	   make
+	   make install
+
+----------------------------------------------------------------------
+
+To use text version.
+This Curses library comes with most of the Linux distributions (It comes with all Red Hat distributions 8.0 onwards). If you don't have this library, try to get hold of a Red Hat CD or some other Linux distribution CD that has the nCurses rpm. 
+
+----------------------------------------------------------------------
+If you are getting problem while installing mesa or curses libs  e.g Makefile gives Error during installing, Then you need some basic .so files that while installing Linux you have not install.
+----------------------------------------------------------------------
+
+To start building your bots:
+	1.See Program.html to see all funtions & Basic things you should know.
+	2.Go through all samples codes.
+
+To complile your .C/.C++ codes
+	./makebot <yourCode.c> <binaryfile>
+	or
+	gcc -DLINUX -o <binaryfile> <yourCode.c> aibots.c OsDeps.c -lnsl -lm
+
+Now you are ready to fight:
+	./combat maps/<mapfile> <bot1> <bot2>
+
+If you want to change the map use:
+	./mapediter maps/<mapfile>
+		use 'q' for quit, 's' for save.
+
+======================================================================
+
+	For Latest info visit http://www.shaastra.org/events/aiwars
+
+======================================================================
+
+Developer:
+	Anshul Gour<anshulgour@yahoo.co.in>
+
+	with the help of:
+	1.Yateendra Despande.
+	2.Bharatiya Varun
+	3.Rakesh Garwal
+
+For bugs, queries and suggestions, contact the developer.
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+

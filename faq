@@ -1,0 +1,36 @@
+FAQ
+
+1. What map will be used for Shaastra 2004 (Oct. 8th to 11th) at IIT Madras?
+
+Ans.
+
+We will be using any random map it may be from maps folder or may not.
+
+2. How do I extract the contents of the archive 'riseofbots-x.xx.tar.gz'?
+
+Ans.
+
+In Linux, you can do this by changing the directory to the one which
+holds the archive, and then typing the command 'tar -xvzf riseofbots.x.xx.tar.gz'.
+This will create the directory riseofbots-x.xx and extract the files within it.
+
+In Windows, you will need some program to extract gz files. The popular
+archiver WinZip is capable of doing this. Open the archive in WinZip and
+then click Extract. Make sure that the checkbox 'Use Folder Names' is checked
+and then type in the destination directory in the Extract to textbox.
+
+3. When I try to build the binaries in Linux, I get messages saying
+   'Invalid Interpreter'.
+
+Ans. This is most probably caused because you extracted the archive in Windows
+and then are accessing it through Linux. Due to this, the line endings mark is
+CR+LF, whereas Linux needs a line ending mark of just CR. To fix this,
+re-extract the archive contents in Linux itself, as described above.
+
+4. The combat server complains that the blank map included is an invalid mapfile.
+
+Ans. This is also most probably due to the above problem. Try re-extracting
+the archive in Linux.
+
+See the file readme for more details. Please note that the Windows version
+has been found to run substantially slower than the Linux version.

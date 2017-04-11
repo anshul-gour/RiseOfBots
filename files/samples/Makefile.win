@@ -1,0 +1,46 @@
+# Makes all the samples
+
+CC=cl -w -nologo -DWIN32 -w
+LINK= link -nologo
+LIBS= wsock32.lib
+
+all: BlackCats CheckWall Fire UpgradeEdan Messager UpgradeNost Power ResourceLover
+
+BlackCats: aibots.obj OsDeps.obj BlackCats.obj 
+	$(LINK) /out:../../BlackCats.exe BlackCats.obj aibots.obj OsDeps.obj $(LIBS)
+CheckWall: aibots.obj OsDeps.obj CheckWall.obj 
+	$(LINK) /out:../../CheckWall.exe CheckWall.obj aibots.obj OsDeps.obj $(LIBS)
+Fire: aibots.obj OsDeps.obj Fire.obj 
+	$(LINK) /out:../../Fire.exe Fire.obj aibots.obj OsDeps.obj $(LIBS)
+UpgradeEdan: aibots.obj OsDeps.obj UpgradeEdan.obj 
+	$(LINK) /out:../../UpgradeEdan.exe UpgradeEdan.obj aibots.obj OsDeps.obj $(LIBS)
+Messager: aibots.obj OsDeps.obj Messager.obj 
+	$(LINK) /out:../../Messager.exe Messager.obj aibots.obj OsDeps.obj $(LIBS)
+UpgradeNost: aibots.obj OsDeps.obj UpgradeNost.obj 
+	$(LINK) /out:../../UpgradeNost.exe UpgradeNost.obj aibots.obj OsDeps.obj $(LIBS)
+Power: aibots.obj OsDeps.obj Power.obj 
+	$(LINK) /out:../../Power.exe Power.obj aibots.obj OsDeps.obj $(LIBS)
+ResourceLover: aibots.obj OsDeps.obj ResourceLover.obj
+	$(LINK) /out:../../ResourceLover.exe ResourceLover.obj aibots.obj OsDeps.obj $(LIBS)
+
+aibots.obj: aibots.c
+	$(CC) -c aibots.c -Foaibots.obj
+OsDeps.obj: OsDeps.c OsIncl.h
+	$(CC) -c OsDeps.c -FoOsDeps.obj
+
+BlackCats.obj: BlackCats.c
+	$(CC) -c BlackCats.c
+CheckWall.obj: CheckWall.c
+	$(CC) -c CheckWall.c
+Fire.obj: Fire.c
+	$(CC) -c Fire.c
+UpgradeEdan.obj: UpgradeEdan.c
+	$(CC) -c UpgradeEdan.c
+Messager.obj: Messager.c
+	$(CC) -c Messager.c
+UpgradeNost.obj: UpgradeNost.c
+	$(CC) -c UpgradeNost.c
+Power.obj: Power.c
+	$(CC) -c Power.c
+ResourceLover.obj: ResourceLover.c
+	$(CC) -c ResourceLover.c

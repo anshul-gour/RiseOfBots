@@ -1,0 +1,120 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>AI Bots II Installation Manual</title>
+</head>
+
+<body>
+
+  <h1><center>Rise Of Bots Installation Manual</center></h1>
+  <hr>
+  <p>Before you install Rise Of&nbsp; Bots, you need to know a few things about the 
+  program.</p>
+  <p>This program is constructed so that it can compile both in Windows and 
+  Linux. You need to first of all decide which platform you are going to use to 
+  develop your bot. We suggest that you use the Linux platform as far as 
+  possible, since the program performs far better on Linux. We have also noted 
+  some timing problems in the Windows version. In any case, if you are using 
+  this program to participate in Shaastra 2004 to be held at IIT Madras, you 
+  should note that the final event will be run on the Linux platform.</p>
+  <h3>Installing Rise Of Bots</h3>
+  <b>For Linux:</b>
+  <ol>
+	  <li>After downloading riseofbots-x.xx.tar.gz, type 
+	  <b>tar -xvzf riseofbots-x.xx.tar.gz</b>
+	  
+	  <li>Go to 
+	  <b>riseofbots-x.xx/</b> directory and type<br>
+	  <b>./build </b>
+	  (This will make combat &amp; diaplay)<li>Compile your code &amp; run Combat 
+      Engine.</ol>
+  <p>&nbsp;&nbsp;&nbsp; <a href="ldddeps.txt">Click here</a> to see a list of 
+  the various library files you will need.<br>
+  </p>
+  <b>Binary Requirement:</b><menu>
+    <li><b>Xfree: </b>You can install the rpm from the Red Hat Linux (8.0 or 
+    later) Installable Package. If you have Rat Hat (8.0 or later)&nbsp;or Mandrake Linux (8.0 or later) you need not perform this step.</li>
+  </menu>
+  <ul>
+	<li><b>Mesa</b> <b>:</b><ul type="disc">
+		<li>Mesa is downloadable from
+        <a href="http://www.sourceforge.net/projects/mesa3d">The Mesa page</a>.
+		Download the latest distribution 
+		in tar.gz or tar.bz2 format and extract the contents.
+		</ul>
+	<p><b><a name="mesa_demos">Mesa-demos</a></b> <b>:</b><ul type="disc">
+		<li>Mesa demos is also downloadable from
+        <a href="http://www.sourceforge.net/projects/mesa3d">The Mesa page</a>. 
+        Download the latest version and extract the contents in same folder not 
+        overwriting.</ul>
+	<p>Use the installation manual to install mesa.</p>
+    <p>&nbsp;<li><b>nCurses</b> :&nbsp; This library comes with most of the 
+    Linux distributions (It comes with all Red Hat distributions 8.0 onwards). 
+    If you don't have this library, try to get hold of a Red Hat CD or some 
+    other Linux distribution CD that has the nCurses rpm. </li>
+  </ul>
+  <hr>
+
+				
+
+  <p><br>
+  <b>For Windows:</b> </p>
+  <ul>
+	  <li> 
+	  <b>riseofbots-x.xx-win32.zip</b>
+	  <ol>
+		  <li>Extract the contents of the zip file.<br>
+		  <li>Copy the glut32.dll( <a href="#Glut">Glut</a> ) in &lt;windows 
+          dir&gt;\windows\system\
+		  <li>Compile your code &amp; run Combat Engine.</ol>
+      <p><a href="dlldeps.txt">Click here</a> to view the dependencies of the 
+		  executables. </p>
+      <p>&nbsp;<li> 
+	  <b>riseofbots-x.xx.tar.gz</b>
+	  <ol>
+		  <li>Extract the contents of the gz file using WinZip or any 
+		  other decompression utility.
+		  <li>Go to 
+	  <b>riseofbots-x.xx/</b> directory and execute<br>
+		  <b>
+			  build.bat </b>(This will make combat.exe &amp; display.exe)<li>
+          Compile your code &amp; run Combat Engine.</ol>
+	  </ul>
+  <p>&nbsp;</p>
+  <p><b>Library Requirement:</b></p>
+  <ul>
+	<li><b><a name="Glut">OpenGL with Glut</a>:</b><ul type="disc">
+		<li>Download <b>glut-3.7.6-bin.zip</b> (binary for windows) from
+        <a href="http://www.pobox.com/~nate/glut.html">
+        www.pobox.com/~nate/glut.html</a>.<li>Extract the contents of the archive 
+        and then copy the file&nbsp; glut32.dll to your windows system directory 
+        (eg. <a href="file:///c:/windows/system">c:\windows\system</a>)<li>If 
+        you have Visual C++, copy the files glut32.lib and glut.h to the 
+        appropriate lib and include directories as given in the glut readme 
+        file.</ul>
+	<li><b><a name="pdcurses">PDCurses for windows</a></b>
+    <ul>
+      <li>Download <b>pdc25_vc_w32.zip</b> from
+      <a href="http://sourceforge.net/pdcurses">The PDCurses page</a>. Follow 
+      the installation instructions present in the package. </li>
+      <li>You will need to copy the file curses.dll to your windows system 
+      directory (eg. <a href="file:///c:/windows/system">c:\windows\system</a>).</li>
+    </ul>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Download <b>
+    pdcurs26.zip</b> from <a href="http://sourceforge.net/pdcurses">The PDCurses 
+    page</a>. Follow the installation instructions present in&nbsp;&nbsp;&nbsp; 
+    the package. </p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; You will need to have 
+    the popular C compiler DJGPP installed for this.</li>
+	</ul>
+  	    
+
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+  	    
+
+</body>
+
+</html>

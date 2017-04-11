@@ -1,0 +1,88 @@
+Rise Of Bots.
+
+This is a game that has been developed to host an event in Shaastra 2004, the technical festival of IIT Madras, India by the students of that institution.
+While all attempts have been made to maintain similarity between the Windows and Linux versions of this program, slight differences might have crept in. It has been noticed that the Linux version gives slightly better performance when compared to the Windows version. Hence you are advised to test your code a few times on the Linux version, as this is what will be used for the event in Shaasthra 2004.
+
+
+Getting started (for Windows users) :
+
+Extract the contents of the archive into the respective directories
+
+Before using the windows version you need to install OpenGL or PDcurses.
+
+	You can download OpenGL at www.pobox.com/~nate/glut.html 
+	And copy glut32.dll to <windows dir>/system32
+
+Now you are ready to ....
+
+	1. If you are using Win32 Precompiled Executables(From WIN32 folder). Just copy both executables in RiseOfBots Dir.
+		
+	2. If you want to compile the code & make executables :
+		a) Copy glut.h to <VS dir>\VC98\include
+		   Copy glut32.lib to <VS dir>\VC98\lib
+		b) Set the envirnment variable of VS 
+		   You can do this:
+			1. While installing Visual Studio Click check box of " Register Enviornment Variables"
+			or
+
+			2. run the batch file 'VCVARS32.bat' present in(VC98DIR)\BIN.
+			or
+
+			3.'SET INCLUDE=(VC98DIR)\Include' and
+		        'SET LIB=(VC98DIR)\Lib'.
+----------------------------------------------------------------------
+To install PDcurses :
+
+Download pdcurs26.zip from The PDCurses page <http://sourceforge.net/pdcurses>. Follow the installation instructions present in the package. You will need to have the popular C compiler DJGPP installed for this. 
+----------------------------------------------------------------------
+			   
+		c) type buildgl or buildtext in cmd.
+		   This will make combat.exe & display.exe & various samples in RiseOfBots dir , A sample run of BlackCats & Fire.
+
+
+To start building your bots:
+	1.See Program.html to see all funtions & Basic things you should know.
+	2.Go through all samples codes.
+
+To complile your .C/.C++ codes
+	makebot  <c/c++ file>  <outputfile>
+	or
+	cl -DWIN32 -TP -Fe<outputfile> <c/c++ file> wsock32.lib aibots.c OsDeps.c 
+
+Now you are ready to fight:
+	combat.exe maps/<mapfile> <bot1> <bot2>
+
+If you want to change the map use:
+	mapediter.exe maps/<mapfile>
+		use 'q' for quit, 's' for save.
+
+======================================================================
+
+	For Latest info visit http://www.shaastra.org/events/aiwars
+
+======================================================================
+
+Developer:
+	Anshul Gour<anshulgour@yahoo.co.in>
+
+	with the help of:
+	1.Yateendra Despande.
+	2.Bharatiya Varun
+	3.Rakesh Garwal
+
+For bugs, queries and suggestions, contact the developer.
+==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+

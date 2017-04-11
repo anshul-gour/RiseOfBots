@@ -1,0 +1,199 @@
+<html xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=FrontPage.Editor.Document>
+<meta name=Generator content="Microsoft FrontPage 5.0">
+<meta name=Originator content="Microsoft Word 10">
+<title>Tips:</title>
+<!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman"; margin-left:0in; margin-right:0in; margin-top:0in}
+h2
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:2;
+	font-size:18.0pt;
+	font-family:"Times New Roman";}
+h3
+	{margin-top:12.0pt;
+	margin-right:0in;
+	margin-bottom:3.0pt;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	page-break-after:avoid;
+	mso-outline-level:3;
+	font-size:13.0pt;
+	font-family:Arial;}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman"}
+</style>
+<![endif]-->
+</head>
+
+<body lang=EN-US style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<p class=MsoNormal>Tips:</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>How does the whole thing work?</p>
+
+<p class=MsoNormal>The combat server starts first. It waits for every bot to be
+initiated for 1 second each. For every bot, the participant’s program is run
+and instructions received from it are given to the combat server. The combat server
+changes game parameters accordingly and sends the changes to display client.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>&nbsp;How can different instructions be given to different
+bots?</p>
+
+<p class=MsoNormal>A team has three bots whose bot <span class=GramE>id’s</span>
+are 0, 1 and 2. Thus separate instructions can be given to bots. </p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>When does a function like<span class=SpellE><span
+class=GramE> GetInfo___</span></span><span class=GramE>(</span>) or Scan___() return?</p>
+
+<p class=MsoNormal>It returns immediately the values of parameters for the last
+gametime.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal><b><i>Moving:</i></b> A bot moves 0.33 units in every three
+game time. To be precise, it moves one step whenever the game time modulus 3 is
+2. When you give a move instruction to make the bot move in a particular
+direction but the bot is not facing that direction, it will take some time to
+face that direction. A bot turns twenty degrees whenever the game time modulus
+3 is 2.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<p class=MsoNormal>The <span class=SpellE><span class=GramE>IsWall</span></span><span
+class=GramE>(</span>) function can be used once every gametime, so the bot can
+see for 5*5 squares around it before it moves one unit, which is a lot of
+information.</p>
+
+<p class=MsoNormal>Also, move returns whether a wall is there in its <span
+class=GramE>way up to 2 blocks (</span>in the current direction of motion).</p>
+
+<p class=MsoNormal>Managing resources is an important thing in the game. But to
+get them, a good move program is equally important.</p>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+<p class=MsoNormal><b><i>The concept of a bomb:</i></b> A bomb can be dropped
+with a range between zero and 3. A bomb explodes in 2 stages as its radius
+increases from 0 to 1. The stage of explosion changes whenever the game time
+modulus 3 is 2. A nearby bot will suffer damage whenever the stage of explosion
+changes. Stage 1 will cause a damage of 2 to a bot which is at the exact
+location of the bomb, Stage 2 will cause a damage of 1 to bots which are at a
+distance less than or equal to 1 unit from the bomb.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h3><i><span style='font-size:12.0pt;font-family:"Times New Roman"'>Program
+termination:&nbsp;&nbsp; </span></i></h3>
+
+<p class=MsoNormal style='margin-bottom:12.0pt'>The worst thing that could ever
+happen in an <span class=SpellE>aiwars</span> game is termination of the
+driving program. It is a programmers’ nightmare. So beware of it and take
+necessary steps to prevent it. In AI Wars a program termination will remove the
+bot from the arena and it will also be penalized. Program termination is
+usually caused by the following<span class=GramE>:</span><br>
+<br>
+1. Normal program termination will occur whenever the main function of the
+driving program exits. Check your program flow properly to prevent this kind of
+termination. This type of termination can be avoided very easily.<br>
+<br>
+2. Abnormal program termination will be caused whenever there is a NULL pointer
+assignment or your program tries to access a memory location that is not
+allotted to it <span class=GramE>( segmentation</span> fault ). This error is
+very difficult to detect and debug. You need careful examination of the code to
+spot this error<br style='mso-special-character:line-break'>
+<![if !supportLineBreakNewLine]><br style='mso-special-character:line-break'>
+<![endif]></p>
+
+<p class=MsoNormal>3. Whenever a driving program makes a request that the
+combat server can not understand, the driving program will not be terminated
+but any further requests from it will be ignored and the bot will be
+disqualified and penalized similarly. This error will occur only if you try to
+use sockets (it is illegal for driving programs to use sockets, multi threads,
+etc.) and do it the wrong way.<br>
+<br>
+It is highly difficult to tell whether an abnormal termination will occur or
+not. It is even more difficult to tell when it will occur. So test your program
+as many times as possible. In <span class=SpellE>Shaastra</span> 2002, a
+driving program qualified till the finals without any glitch, but ended up in
+the second place because it had an abnormal termination during the tie-breaker
+for the first place. There were other nice programs that had some nice
+strategies but they could not make it to the first place because they had
+abnormal terminations in the final round. So a good strategy is not enough;
+error free coding is also necessary.</p>
+
+<p class=MsoNormal>&nbsp;</p>
+
+<h2><i><span style='font-size:12.0pt'>The samples</span></i></h2>
+
+<p class=MsoNormal>The samples are given to explain the usage of the bot
+functions and the <span class=SpellE>conepts</span>. These are not typical
+driving programs. They are not designed to win. Most of the samples are ripped
+from the previous version of the game.</p>
+
+</div>
+
+</body>
+
+</html>

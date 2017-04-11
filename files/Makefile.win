@@ -1,0 +1,13 @@
+# Makes all the samples
+
+CC=cl -w -nologo -DWIN32 -TP -w
+LIBS= wsock32.lib
+
+all: aibots.obj OsDeps.obj
+
+aibots.obj: aibots.c aibots.h
+	$(CC) -c aibots.c
+
+OsDeps.obj: OsDeps.c OsIncl.h
+        $(CC) -c OsDeps.c
+

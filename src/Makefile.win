@@ -1,0 +1,30 @@
+DEFINE= -DWIN32
+CC= cl -nologo $(DEFINE) -w
+LINK= link -nologo
+LIBS= wsock32.lib
+
+all: combat display mapediter
+
+combat: combat.obj OsDeps.obj
+	$(LINK) /out:..\combat.exe combat.obj OsDeps.obj $(LIBS)
+
+display:display.obj OsDeps.obj
+	$(LINK) /out:..\display.exe display.obj OsDeps.obj $(LIBS)
+
+mapediter:mapediter.obj OsDeps.obj
+	$(LINK) /out:..\mapediter.exe mapediter.obj $(LIBS)
+
+OsDeps.obj: OsDeps.c 
+	$(CC) -c -FoOsDeps.obj OsDeps.c
+
+combat.obj: combat.c dispcomm.h objects.h
+	$(CC) -c -Focombat.obj combat.c
+
+display.obj: display.c dispcomm.h objects.h
+	$(CC) -c -Fodisplay.obj display.c
+
+mapediter.obj: mapediter.c
+	$(CC) -c -Fomapediter.obj mapediter.c
+
+clean: 
+	del *.obj

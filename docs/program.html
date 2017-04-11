@@ -1,0 +1,357 @@
+<html>
+
+<head>
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta http-equiv="Content-Language" content="en-us">
+<title>New Page 1</title>
+</head>
+
+<body>
+
+<p align="center">&nbsp;<img border="0" src="rob.jpg" width="860" height="150"></p>
+
+<font size="3" type="Times New Roman">
+<h2>What are the basic things I need to know before writing a driving program?</h2>
+<p>You must know the basics of C/C++ programming. You must also know the 
+functions available to control the bots. These functions are declared and 
+defined in the files aibots.h and aibots.c which are in <b>riseofbots-x.xx/files
+</b>. Given below is a summary of those functions.<br>
+&nbsp;</p>
+</font>
+<hr>
+<h2><a name="top">Functions Summary</a></h2>
+<ol>
+  <li><a href="#1"><strong>int Init(char * thename)</strong></a></li>
+  <li><a href="#2"><strong>int GetInfoEdan(int edanIndex, int * x, int * 
+  y, char * res,char *upgradedTo,int *ismoving, int * life,unsigned long * lastscan, unsigned 
+  long * time)</strong></a></li>
+  <li><a href="#3"><strong>int GetInfoEnemy(int enemyIndex,int *x,int *y,char 
+  *res,int *life) </strong></a></li>
+  <li><a href="#25"><strong>int GetInfoNost(int nostIndex, int * x,int * 
+  y,int * haveVasa,int * haveTathar,int * haveMalda,int * life,unsigned long 
+  * time)</strong></a></li>
+  <li><a href="#4"><strong>int Move(int dir,int steps)</strong></a></li>
+  <li><a href="#5"><strong>void Stop(void)</strong></a></li>
+  <li><a href="#6"><strong>int Fire(int dir, int range)</strong></a></li>
+  <li><a href="#7"><strong>int Newmsgcount(void)</strong></a></li>
+  <li><a href="#8"><strong>int Msgsend(int edanindex,char *msg)</strong></a></li>
+  <li><a href="#9"><strong>int Msgrecv(char *msg)</strong></a></li>
+  <li><a href="#10"><strong>int Broadcast(char *msg)</strong></a></li>
+  <li><strong><a href="#11">int ScanEdan(int dir,int *scanDir,int *scanRange, int 
+  *scanEdanId,char *res,int *life)</a></strong></li>
+  <li><strong><a href="#12">int ScanNost(int dir,int *scanDir,int *scanRange,int 
+  *scanNostid)</a></strong></li>
+  <li><strong><a href="#13">int Scan</a><a href="#17">Resource</a><a href="#13">(int dir,int *scanDir,int *scanRange,char 
+  *type)</a></strong></li>
+  <li><a href="#14"><strong>int Pass</strong></a><strong><a href="#17">Resource</a></strong><a href="#14"><strong>ToEdan(int edanIndex)</strong></a></li>
+  <li><a href="#15"><strong>int Pass</strong></a><strong><a href="#17">Resource</a></strong><a href="#15"><strong>ToNost(int nostIndex)</strong></a></li>
+  <li><a href="#16"><strong>int Put</strong></a><strong><a href="#17">Resource</a></strong><a href="#16"><strong>(int dir,int range)</strong></a></li>
+  <li><strong><a href="#17">int LocateResource(char type, int *x, int *y)</a></strong></li>
+  <li><strong><a href="#18">int IsWall(int, int)</a></strong></li>
+  <li><a href="#19"><strong>int Get</strong></a><strong><a href="#17">Resource</a></strong><a href="#19"><strong>FromNost(int nostIndex,char type)</strong></a></li>
+  <li><a href="#20"><strong>int MakeNost(int nostIndex, int relX, int 
+  relY)</strong></a></li>
+  <li><a href="#21"><strong>int UpgradeEdan(int nostIndex)</strong></a></li>
+  <li><a href="#22"><strong>int UpgradeNost(int nostIndex ,char type)</strong></a></li>
+  <li><a href="#23"><strong>int PowerEdan(int nostIndex,char type)</strong></a></li>
+  <li><a href="#24"><strong>int HavePower(char)</strong></a></li>
+</ol>
+<hr>
+<h3><font color="#0000FF">1. <a name="1">int Init(char * thename)</a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b>&nbsp; The name of the 
+Edan.(maximum 18 Char including \0)</font></p>
+<p><b>Output: </b>&nbsp;Edan's Id (0 -2)</p>
+<p><b>Description: </b>&nbsp;<font size="3" type="Times New Roman">This function is for initializing the 
+bot. This functions should be called before you do anything else (except, 
+perhaps, some initializations). You should not call any other functions before 
+you call this function. When the combat server starts your driving program it 
+will wait for nearly 1 second for it to call init. Otherwise it will be 
+disqualified. This function returns only when all other programs have been 
+loaded and they have called init. The init functions of all the bots return 
+simultaneously. Otherwise it is truncated 
+to 18 characters.</font></p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+<h3><font color="#0000FF">2. <a name="2">int GetInfoEdan(int edanIndex, int * x, int * y, 
+char * res,char *upgadedTo,int *ismoving, int * life,unsigned long * lastscan, unsigned long * 
+time)</a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font>Edan's Index</p>
+<p><b>Output:</b> x, y coordinates, whether it has resource, if it is upgraded, 
+whether the edan is moving(1 if moving, 0 if not), 
+its current hit points, the last gametime when it was scanned.</p>
+<p><font size="3" type="Times New Roman"><b>Description:</b> This function is used to get various 
+information about the edan. Res will be -1 if Edan does not have any, otherwise 
+return it's type(VASA,TATHAR,MALDA). Same upgradedTo is -1 if Edan is not 
+upgraded else TURBO, RANGEDBOMB, GOLDENEYE.</font></p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+<h3><font color="#0000FF">3. <a name="3">int GetInfoEnemy(int enemyIndex,int *x,int 
+*y,char *res,int *life)</a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font> Enemy's Index</p>
+<p><b>Output:</b> x, y coordinates, resource if have,life.</p>
+<p><font size="3" type="Times New Roman"><b>Description:</b> This function is used to get various 
+information about any enemy edan. This can be called only after your bot is 
+upgraded to GOLDENEYE.</font></p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+<h3><font color="#0000FF">4. <a name="25">int GetInfoNost(int nostIndex, int * x, int * 
+y,int * haveVasa,int * haveTathar,int * haveMalda, int * life,unsigned long * 
+time)</a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b> Nost Index. </font></p>
+<p><b>Output:</b> x &amp; y coordinates, no. of&nbsp; units of vasa, tathar and malda in 
+the nost, current hit points and gametime (these things are not returned, but 
+stored in the variables). <font size="3" type="Times New Roman">&nbsp;</font></p>
+<p><b>De</b><font size="3" type="Times New Roman"><b>scription: </b>This function gives the edan information about any of his nosts..<br>
+&nbsp;</font></p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+<h3><font color="#0000FF">5. <a name="4">int Move (int dir, int steps)</a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font>: direction in which to move, no. of steps to move in that direction 
+(how many blocks).</p>
+<p><b>Output</b>: if any wall is there in move dir nearby 2 blocks.</p>
+<p><font size="3" type="Times New Roman"><b>Description:</b> This function makes the bot to move a 
+step in a particular direction. The <b>direction </b>parameter is given in 
+degrees measured from the eastern direction. Whenever you give a move 
+instruction the request is sent to the combat server and<u> <i>the function 
+returns the moment the combat server processes the request</i></u>. If your bot 
+is not facing that direction then it will take some time to turn to that 
+direction and then it will start moving in that direction. Your bot will stop 
+moving whenever it travels the required number of steps or hits a wall or 
+another bot. So there is no assurance that the bot moves the number of steps you 
+wanted it to move.<br>
+&nbsp;</font></p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+<h3><font color="#0000FF">6. <a name="5">void Stop(void)</a></font></h3>
+<h3><font size="3" type="Times New Roman">I<b>nput:</b></font><span style="font-weight: 400"><font size="3"> 
+none</font></span></h3>
+<p><b>Output:</b>&nbsp; none</p>
+<h3><font size="3" type="Times New Roman">
+Description:<span style="font-weight: 400"> This function will stop a bot in its 
+tracks.</span></font></h3>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+<h3><font color="#0000FF">7. <a name="6">int Fire(int dir,int range)</a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font>direction (in degrees) in which to bomb, and the distance at which the 
+bomb should fall.</p>
+<p><b>Output:</b> it returns 0 if the bomb could not be thrown, 1 if it is.</p>
+<p><b>Description:</b> This function fires a bomb in the given direction and range.<font size="3" type="Times New Roman">If 
+the range is greater than 5, it is truncated to 5. The function returns 0 if a 
+bomb could not be thrown. This is because you can have only one shot at a time 
+(in a gametime).</font></p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+<h3><font color="#0000FF">8. <a name="7">int NewMsgCount(void)</a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font> none</p>
+<p><b>Output:</b> No. of messages in stack.</p>
+<p><font size="3" type="Times New Roman"><b>Description:</b> This function returns the number of 
+unread messages that a bot had when it last sent a request to the combat server. 
+This is the only function that is not blocked. Note that this function returns 
+the local copy of the number of unread messages. This local copy is updated 
+whenever the combat server is contacted through other bot functions (I mean to 
+say that calling this function will not update the local copy).</font></p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+<h3>&nbsp;</h3>
+<h3><font color="#0000FF">9. <a name="8">int MsgSend(int edanindex,char *msg)</a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font> the index of the edan who should receive the message and the message 
+as a character array.</p>
+<p><b>Output: </b>1 if message is sent successfully, 0 if not.</p>
+<p><font size="3" type="Times New Roman"><b>Description:</b> This function sends a message (a 
+string) to the bot with the particular edan index. Messages that are longer 
+than 10 characters will be truncated to 10 characters. A message is not sent whenever 
+the bot with edan index edan index does not exist or it does not belong to 
+your team <i>(No Spamming!!)</i> or its stack is full.<br>
+&nbsp;</font></p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+<h3><font color="#0000FF">10. <a name="9">int MsgRecv(char *msg)</a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font> none</p>
+<p><b>Output:</b> returns -1 if stack is empty. Otherwise it gives the topmost message 
+of the stack in msg.</p>
+<p><font size="3" type="Times New Roman"><b>Description:</b> This function is used to read the 
+message on the top of the message stack. The message stored on the top of the 
+stack is put in msg. The function returns -1 if the stack is empty. Otherwise it 
+returns the number of messages that remain in the stack after the message is 
+read.<br>
+&nbsp;</font></p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+<h3><font color="#0000FF">11. v<a name="#10"><strong>oid BroadCast(char *msg)</strong></a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font>: message in form of char array (not more than 10 char including \0)</p>
+<p><b>Output:</b> none</p>
+<p><font size="3" type="Times New Roman"><b>Description:</b> To send message to both 
+team edans.<br>
+&nbsp;</font></p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+
+<h3><strong><font color="#0000FF">12. <a name="#11">int ScanEdan(int dir,int *scanDir,int *scanRange, int 
+  *scanEdanId,char *res,int *life)</a></font></strong></h3>
+<p><font size="3" type="Times New Roman">I<b>nput: </b></font>direction.</p>
+<p><b>Output:</b> return 1 if any enemy scanned, in which dir &amp; at what range, 
+it's ID, if has res, it's life.</p>
+<p><b>Description: </b>only enemies can be scanned &amp; between +20 to -20 direction .</p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+
+<h3><font color="#0000FF">13. <strong><a name="#12">int ScanNost(int dir,int *scanDir,int *scanRange,int 
+  *scanNostid)</a></strong></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font> direction </p>
+<p><b>Output: </b>returns 1 if any enemy Nost scanned, in which dir &amp; at what 
+range, it's ID.</p>
+<p><b>Description:</b> only enemy Nost can be scanned &amp; between +20 to -20 dir .</p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+
+<h3><strong><font color="#0000FF">14.</font> <font color="#0000FF"> <a name="#13">int ScanResource(int dir,int *scanDir,int *scanRange,char 
+  *type)</a></font></strong></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font> direction</p>
+<p><b>Output:</b> 1 if resource is there 0 if it is not.</p>
+<p><b>Description:</b> The edan can throw a res to a nearby point. If the range he 
+gives are more than 3 each, they will be cut down to 3.The resource might not be 
+kept if the place is not free i.e. there is wall, another resource, enemy</p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+
+<h3><font color="#0000FF">15. </font><a name="#14"><strong>
+<font color="#0000FF">int PassResourceToEdan(int edanIndex)</font></strong></a></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font> To which edan.</p>
+<p><b>Output:</b> 1 if possible to pass, 0 if not.</p>
+<p><b>Description:</b> only if the distance between edans are less than 3.</p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+
+<h3><font color="#0000FF">16. <a name="#15"><strong>int PassResourceToNost(int nostIndex)</strong></a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font> To which Nost.</p>
+<p><b>Output:</b> 1 if passed,0 if not</p>
+<p><b>Description:</b> only if the distance between edan and nost is less than 
+3.</p>
+<h3><b><a href="#top"><font size="2">Back to Top</font></a></b></h3>
+<hr>
+
+<h3><font color="#0000FF">17. <a name="16">int PutResource(int direction, int 
+range)</a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput: </b></font>direction and range where the resource should be thrown.</p>
+<p><b>Output:</b> 1 if resource is put, 0 if unable to put.</p>
+<p><b>Description:</b> only if the distance is less than 3.</p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+
+<h3><font color="#0000FF">18. <strong><a name="#17">int LocateResource(char type, int *x, int *y)</a></strong></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font> type of resource 
+(VASA,TATHAR,MALDA)</p>
+<p><b>Output:</b> returns 0 if resource is not available (gives x= -1,y= -1), 1 if 
+it is.&nbsp; x and y are the coordinates of the resource.</p>
+<p><b>Description:</b> This function is used for locating an untouched resource.</p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+
+<h3><font color="#0000FF">19. <strong><a name="#18">int IsWall(int relX, relY)</a></strong></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font> x and y position 
+on the map relative to the edan not more than 2.</p>
+<p><b>Output:</b> 0 if there is not a wall at a valid block of map, 1 otherwise.</p>
+<p><b>Description:</b> The edan can look out for obstacles by calling this 
+function. Only one request of this function will be processed every gametime.</p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+
+<h3><font color="#0000FF">20. <a name="#19"><strong>int GetResourceFromNost(int nostIndex,char type)</strong></a></font></h3>
+
+<h3><font size="3" type="Times New Roman">I<b>nput:</b></font><span style="font-weight: 400"><font size="3"> 
+index of the nost from where the edan intends to pick the resource, and the type 
+of resource it would like to retrieve.</font></span></h3>
+<p><b>Output:</b> 1 if resource is retrieved, 0 if unable to retrieve.</p>
+<p><b>Description: </b>Resources can be taken out of a nost if the edan is 
+within a range of 3 units from the nost and is not carrying any other resource.</p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+
+<h3>&nbsp;</h3>
+<h3><font color="#0000FF">21. <a name="20">int MakeNost(int nostIndex, int relX, int 
+  relY)</a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput: </b></font>An index for the nost 
+from which the resource should be used, x and y coordinates relative to the edan.</p>
+<p><b>Output: </b>1 if nost is built, 0 if it is not.</p>
+<p>Description: Builds a nost at the given coordinates relative 
+to the edan not more than 1 distance in any dir from edan. A nost cannot be built if&nbsp; a) the team does not have 
+required resources in a nost OR b) the 
+effective x and y coordinates are not valid.</p>
+<p>In this case, the function returns a 0.</p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+<h3><font color="#0000FF">22. <a name="21">int UpgradeEdan(char resource)</a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font> type of resource 
+to use while upgrading that edan</p>
+<p><b>Output:</b> 1 if upgraded, 0 if not.</p>
+<p><b>Description:</b> This upgrades the edan for the next 800 gametime. The 
+health of the edan increases by 50 (does not exceed 100). The special ability 
+gained depends on the resource used.</p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+<h3><font color="#0000FF">23. <a name="22">int UpgradeNost(int nostIndex ,char type)</a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font> Index of the nost which you want to increase hitpoints, 
+and the type of res to use for upgrading.</p>
+<p><b>Output: </b>returns 1 if upgraded, 0 if not.</p>
+<p><b>Description:</b> Increases the hit points of a nost by 500 after consuming a resource.</p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+
+<h3><font color="#0000FF">24. <a 23="#23"><strong>int PowerEdan(int nostIndex, char type)</strong></a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font> from which Nost 
+you are using resource &amp; what type.</p>
+<p><b>Output:</b> 1 if edan got power.</p>
+<p><b>Description:</b> VASA will give power to move doubled speed, TATHAR will 
+give power to BALLISTO (bomb's hit points doubled). MALDA for SHIELD.</p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+
+<h3><font color="#0000FF">25. <a name="#24"><strong>int HavePower(char)</strong></a></font></h3>
+<p><font size="3" type="Times New Roman">I<b>nput:</b></font> name of
+power( SPEED, BALLISTO, SHIELD)</p>
+<p><b>Output::</b> 1 if he possesses the power, 0 if he does not.</p>
+<p><b>Description:</b> To know whether a&nbsp; power is possessed by the edan.</p>
+<h5><a href="#top">Back to Top</a></h5>
+<hr>
+
+<h5></h5>
+
+<p><b><font size="5">Key Board Functions for display client:</font></b></p>
+<p><font color="#0000FF">1. <strong>'q' or 'Q' : Quit</strong></font></p>
+<p><strong><font color="#0000FF">2. ' ' (Space Bar) Toggle mode between 2-d &amp; 
+3-d.</font></strong></p>
+<p><strong><font color="#0000FF">3. 'x', 'X' ,'y', 'Y', 'z' ,'Z' : Placing 
+Camera Position.</font></strong></p>
+<p><strong><font color="#0000FF">4. 'n' Toggle between numbering of Edan.</font></strong></p>
+<p><strong><font color="#0000FF">5. '+', '-' Changing Game Speed.</font></strong></p>
+<p><strong><font color="#0000FF">6. upArrow &amp; downArrow for special description 
+of Edans.</font></strong></p>
+<hr>
+
+<p>Some Macro defined in aibots.h . </p>
+<p>These are::</p>
+<p><font color="#0000FF">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAPX = 25<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MAPY = 25</font></p>
+<p><font color="#0000FF">Resource Type:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VASA<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TATHAR<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; MALDA</font></p>
+<p><font color="#0000FF"><br>
+Upgraded Type:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; TURBO<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; RANGEDBOMB<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GOLDENEYE</font></p>
+<p><font color="#0000FF"><br>
+Special Power Type:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SPEED<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BALLISTO<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SHIELD</font></p>
+<p>(only these type can be used in coding the defined funtions).</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</body>
+
+</html>

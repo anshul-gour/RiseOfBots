@@ -1,0 +1,2 @@
+echo Code making utility. Usage : ./makebot \<sourcefile\> \<executable\>
+g++ -DLINUX -o $2 $1 aibots.c OsDeps.c -lm -lnsl
